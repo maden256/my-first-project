@@ -1,0 +1,33 @@
+#tip1 xu ly file/output command tung dong truc tiep tren shell
+cat /etc/passwd | while read line; do user=$(echo $line | cut -d":" - f1);echo $user;done
+#tip2
+Xac dinh danh sach nhung process ngon nhieu ram nhat
+ps aux -sort:rss | awk 'NR>1 {$6=int($6/1024)"MB";}{print;}'
+
+#tip3 liet ke danh sach process su dung nhieu ram nhat bang top/htop
+top,htop
+shift + M
+- RES chinh la luong RAM ma process dang dung
+
+#tip4
+xac dinh tien trinh dang doc/ghi o cung nhieu nhat
+#iotop
+TID: process/thread ID
+disk read: toc do doc o cung
+disk write: to do ghi o cung
+command: lenh su dung
+
+#tip5 kiem tra bang thong
+theo doi bang thong (bandwidth) va tan so(packet rate) cua card mang bang lenh
+vnstat -l -i eth0
+rx: traffic nhan vao(received/inbound)
+tx: traffic gui di(transmitted/outbound)
+
+#tip6 xac dinh ip va ung dung ngon nhieu bang thong nhat
+nethogs
+
+-s : sap xep theo traffic gui di(sent)
+-r: sap xep theo traffic nhan vao(receive)
+
+#tip7: dem so luong ket noi cua moi IP den server
+netstat -ant | grep -v LISTEN | awk '{print $5}'| cut -d":" -f1| sort | uniq -c| sort -rn |more
